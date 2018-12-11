@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .common{
+            height: 30px;
+            width: 100px;
+            text-align: center;
+            line-height:30px;
+            border:1px solid #000;
+        }
+        .red{
+            background: red;
+        }
+        .green{
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table v-bind:style='style'>
+            <tr>
+                <th v-for="item in week" :class='state'>{{item}}</th>
+            </tr>
+            <tr v-for="(item,index) in type" :class='{green:index%2==0,red:index%2!=0}'>
+                    <td v-for="item in type" :class='state'>{{item}}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+               week:['周一','周二','周三','周四','周五'],
+               type:['语文','数学','英语','物理','化学'],
+               state:{
+                   common:true
+               },
+               trStyle:{
+                  red:true
+               },
+               trsStyle:{
+                  green:true
+               },
+               style:{
+                   borderCollapse:'collapse',
+                   margin:'50px auto'
+               }
+            },
+            methods:{
+                over(){
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

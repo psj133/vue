@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- {{msg}} 插值 -->
+        <!-- 双向数据绑定 -->
+        <!-- <input type="text" v-model='test'>
+        <span>{{test}}</span> -->
+        <!-- <div v-show='show'>{{msg}}</div>
+        <button @click='display()'>显示隐藏</button> -->
+        <!-- <div v-if='show'>{{test}}</div>
+        <div v-else='show'>{{test}}</div> -->
+        <!-- <div V-if="age<=18">未成年</div>
+        <div v-else-if="age>18&&age<=50">青中年</div>
+        <div V-else="age>50">老年</div> -->
+        <div v-for="item in list">{{item}}</div>
+        <p v-for="(item,index) in list">
+               
+                {{index}}
+               </p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"Hello World",
+                test:"123",
+                show:true,
+                age:30,
+                list:[1,2,3],
+                info:{
+                    id:1,
+                    name:'psj'
+                }
+            },
+            methods:{
+                display(){
+                    this.show=!this.show;
+                }
+            }
+        })    
+    </script>
+</body>
+</html>
