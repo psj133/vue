@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{nowTime|time}}
+        <hr>
+        {{getTime()}}
+        <hr>
+        {{nowTime|getTime}}
+    </div>
+    <script>
+        Vue.filter('time',function(val){
+            let res=new Date(val).getFullYear()+"/"+(new Date(val).getMonth()+1)+"/"+new Date(val).getDate();
+            return res;
+        })
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                nowTime:Date.now()
+            },
+            methods:{
+                getTime(){
+                    let val=this.nowTime;
+                    let res=new Date(val).getFullYear()+"/"+(new Date(val).getMonth()+1)+"/"+new Date(val).getDate();
+                    return res;
+                },
+            },
+            filters:{
+                getTime:function(){
+                    let val=this.nowTime;
+                    let res=new Date(val).getFullYear()+"/"+(new Date(val).getMonth()+1)+"/"+new Date(val).getDate();
+                    return res;
+                },
+            }
+        })
+    </script>
+</body>
+</html>

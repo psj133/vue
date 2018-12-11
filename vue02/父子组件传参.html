@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="display">点击</button>
+        <hr>
+        <haha :test="bool"></haha>
+    </div>
+    <template id="tp">
+        <div>              
+            <div :style="obj" v-show='test'></div>
+        </div>
+    </template>
+    <script>
+        Vue.component("haha",{
+            template:"#tp",
+            data(){
+                return {
+                    obj:{
+                        width:'100px',
+                        height:'100px',
+                        background:'red'
+                    },
+                    state:true
+                }
+            },
+            methods:{
+                show(){
+                    this.state=!this.state;
+                }
+            },
+            props:["test"]
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                bool:true
+            },
+            methods:{
+                display(){
+                    this.bool=!this.bool;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+            height: 500px;
+        }
+        td,th{
+            width: 87px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        .red{
+            background:red;
+        }
+        .blue{
+            background: blue;
+        }
+        .div1{
+            width: 450px;
+            height: 1220px;
+            background: #cccccc;
+            text-align: center;
+            line-height: 200px;
+        }
+        button{
+            width: 150px;
+            height: 30px;
+        }
+        .bd{
+            border: 1px solid rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <son></son>
+    </div>  
+    <template id="tp">
+        <table>
+            <tr>
+                <th v-for='(item,index) in list'>{{item}}</th>
+            </tr>
+            <tr v-for='(item,index) in list'>
+                <td v-for='item in arr'>{{item}}</td>
+            </tr>
+        </table>
+    </template>  
+    <template id="tp1">
+            <div>
+                <button v-for="(item,index) in arrs":key="index":class='clicked==item?"red":""' @click="click(item)">{{item}}</button>
+                <haha v-for="(item,index) in arrs" :class='index%2==0?"red":"blue"' v-show="item===clicked"></haha>
+            </div>
+        </template>
+    <script>
+         let child=Vue.extend({
+            template:"#tp1",
+             data(){
+                 return {
+                    arrs:[1,2,3],
+                    styleObj:{
+                        div1:true
+                    },
+                    clicked:1
+                 }
+             },
+             methods:{
+                 click(item){
+                     this.clicked=item;
+                 }
+             }
+        })
+        Vue.component('son',child);
+        Vue.component('haha',{
+             template:"#tp",
+             data(){
+                 return {
+                    list:['周一','周二','周三','周四','周五'],
+                    arr:['语文','数学','英语','物理','化学']
+                 }
+             },
+        })
+       
+        new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

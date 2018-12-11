@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+            margin: 50px auto;
+        }
+        td,th{
+            width: 100px;
+            height: 40px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        .red{
+            background:red;
+        }
+        .blue{
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <haha></haha>
+       <haha></haha>
+    </div>  
+    <template id="tp">
+        <table>
+            <tr>
+                <th v-for='(item,index) in list'>{{item}}</th>
+            </tr>
+            <tr v-for='(item,index) in list':class='index%2==0?"red":"blue"'>
+                <td v-for='item in arr'>{{item}}</td>
+            </tr>
+        </table>
+    </template>  
+    <script>
+        Vue.component('haha',{
+             template:"#tp",
+             data(){
+                 return {
+                    list:['周一','周二','周三','周四','周五'],
+                    arr:['语文','数学','英语','物理','化学']
+                 }
+             }
+        })
+        new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

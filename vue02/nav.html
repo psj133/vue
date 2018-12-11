@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        ul{
+            display: flex;
+            list-style:none;
+        }
+        ul li{
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            background: skyblue;
+            line-height: 30px;
+        }
+        .red{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <hehe></hehe>
+    </div>
+    <template id="tp">
+        <ul>
+            <li v-for="(item,index) in list" :key="index" @click="toggle(item)" :class=' selected===item?"red":""' >{{item}}</li>
+        </ul>
+    </template>
+    <script>
+        let child=Vue.extend({
+            template:"#tp",
+            data(){
+                return{
+                    list:[1,2,3,4],
+                    selected:1
+                }
+            },
+            methods:{
+                toggle(item){
+                    this.selected=item;
+                }
+            }
+        })
+        Vue.component('hehe',child);
+        new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

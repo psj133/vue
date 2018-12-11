@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <!-- vue修饰符
+        阻止事件冒泡 .stop
+    -->
+    <!-- .self只当在 event.target 是当前元素自身时触发处理函数 -->
+<!-- 即事件不是从内部元素触发的 -->
+    <div id="app">
+        <div @click.self='click'>
+            爷爷
+            <div @click='click'>
+                爸爸
+                <div @click.stop='click'>
+                    孙子
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                a:1
+            },
+            methods:{
+                click(){
+                    console.log(this.a);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

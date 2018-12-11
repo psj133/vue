@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        button{
+            width: 100px;
+            height: 30px;
+        }
+        .red{
+            background: red;
+        }
+        .div1{
+            width: 300px;
+            height: 200px;
+            background: #cccccc;
+            text-align: center;
+            line-height: 200px
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <child></child>
+        <child></child>
+    </div>
+    <template id="tp">
+        <div>
+            <button v-for="(item,index) in list":key="index":class='clicked==item?"red":""' @click="click(item)">{{item}}</button>
+            <div v-for="(item,index) in list" :class="styleObj" v-show="item===clicked">{{item}}</div>
+        </div>
+    </template>
+    <script>
+        Vue.component("child",{
+            template:"#tp",
+            data(){
+                return{
+                    styleObj:{
+                        div1:true
+                    },
+                    list:[1,2,3],
+                    clicked:1
+                }
+            },
+            methods:{
+                click(item){
+                    this.clicked=item;
+                }
+            }
+        })
+        new Vue({
+            el:"#app",
+
+        })
+    </script>
+</body>
+</html>
