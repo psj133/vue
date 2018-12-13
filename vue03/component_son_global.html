@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <haha></haha>
+    </div>
+    <template id="tp">
+        <div>
+            爸爸
+            <p v-show="state">哈哈哈</p>
+            <hr>
+            <hehe @test="click"></hehe>
+        </div>
+    </template>
+    <template id="tp1">
+            <div>
+            儿子<button @click='change'>点击</button>
+            </div>
+        </template>
+    <script>
+        Vue.component('haha',{
+            template:"#tp",
+            data(){
+                return{
+                    state:true 
+                }
+            },
+            methods:{
+                click(){
+                    this.state=!this.state;
+                }
+            }
+        })
+        Vue.component('hehe',{
+            template:'#tp1',
+            data(){
+                return{
+                   
+                }
+            },
+            methods:{
+                change(){
+                    this.$emit('test');
+                }
+            }
+        })
+        new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

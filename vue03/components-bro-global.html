@@ -9,34 +9,39 @@
 </head>
 <body>
     <div id="app">
-        <button @click="display">点击</button>
+        <p >哈哈</p>
         <hr>
-        <haha :test="bool"></haha>
-    </div>
-    <template id="tp">
-        <div>              
-            <div :style="obj" v-show='test'>{{test}}</div>
+        <haha @test="change"></haha>
+        <hr>
+        <hehe :num='bool'></hehe>
+    </div> 
+    <template id='tp'>
+        <div>
+            <button @click='click'>点击</button>
         </div>
     </template>
+    <template id='tp1'>
+            <div>
+               <p v-show='num'>你好</p>
+            </div>
+        </template>
     <script>
-        Vue.component("haha",{
-            template:"#tp",
+        Vue.component('haha',{
+            template:'#tp',
             data(){
                 return {
-                    obj:{
-                        width:'100px',
-                        height:'100px',
-                        background:'red'
-                    },
-                    state:true
+                    
                 }
             },
             methods:{
-                show(){
-                    this.state=!this.state;
+                click(){
+                    this.$emit('test');
                 }
-            },
-            props:["test"]
+            }
+        })
+        Vue.component('hehe',{
+            template:'#tp1',
+            props:['num']
         })
         new Vue({
             el:"#app",
@@ -44,7 +49,7 @@
                 bool:true
             },
             methods:{
-                display(){
+                change(){
                     this.bool=!this.bool;
                 }
             }

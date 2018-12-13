@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       <haha></haha>
+    </div>
+    <template id="tp">
+        <div>
+            爸爸
+            <p v-show='state'>aaaa</p>
+            <hr>
+            <hehe @test='change'></hehe>
+        </div>
+    </template>
+    <template id="tp1">
+            <div>
+                儿子
+                <button @click='click'>点击</button>
+            </div>
+        </template>
+    <script>
+        let son=Vue.extend({
+            template:"#tp1",
+            methods:{
+                click(){
+                    console.log(111);
+                    this.$emit('test');
+                }
+            }
+        })
+        let father=Vue.extend({
+            template:"#tp",
+            data(){
+                return{
+                    state:true
+                }
+            },
+            components:{
+                hehe:son
+            },
+            methods:{
+                change(){
+                   this.state=!this.state;
+                }
+            }
+        })
+        
+        new Vue({
+            el:"#app",
+            components:{
+                haha:father
+            }
+        })
+    </script>
+</body>
+</html>

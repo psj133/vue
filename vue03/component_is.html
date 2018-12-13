@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       <components :is='num'></components>
+       <button @click='change'>点击</button>
+    </div>
+    <template id="s1">
+            <div>
+                111
+                
+            </div>
+    </template>
+    <template id="s2">
+           <div>222</div>
+        </template>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+               num:"s1"
+            },
+            methods:{
+                change(){
+                    this.num=this.num==="s1"?"s2":"s1";
+                }
+            },
+            components:{
+                s1:{
+                    template:"#s1"
+                },
+                s2:{
+                    template:"#s2"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

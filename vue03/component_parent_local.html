@@ -9,44 +9,49 @@
 </head>
 <body>
     <div id="app">
-        <button @click="display">点击</button>
-        <hr>
-        <haha :test="bool"></haha>
+        <haha></haha>
     </div>
-    <template id="tp">
-        <div>              
-            <div :style="obj" v-show='test'>{{test}}</div>
+    <template id='tp'>
+        <div>爸爸
+             <button @click='toggle'>点击</button>
+            <hehe :test='state'></hehe> 
         </div>
     </template>
+    <template id='tp1'>
+            <div v-show='!test'>儿子{{test}}
+            </div>
+        </template>
     <script>
-        Vue.component("haha",{
+        let son=Vue.extend({
+            template:"#tp1",
+            data(){
+                return{
+                   
+                }
+            },
+            props:['test']
+        })
+        let father=Vue.extend({
             template:"#tp",
             data(){
-                return {
-                    obj:{
-                        width:'100px',
-                        height:'100px',
-                        background:'red'
-                    },
+                return{
                     state:true
                 }
             },
             methods:{
-                show(){
+                toggle(){
                     this.state=!this.state;
                 }
             },
-            props:["test"]
+            components:{
+                hehe:son
+            }
         })
+        
         new Vue({
             el:"#app",
-            data:{
-                bool:true
-            },
-            methods:{
-                display(){
-                    this.bool=!this.bool;
-                }
+            components:{
+                haha:father
             }
         })
     </script>

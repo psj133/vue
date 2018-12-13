@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <father></father>
+    </div>
+    <template id='father'>
+        <div>father
+            <son1></son1>
+            <hr>
+            <son2></son2>
+        </div> 
+    </template>
+    <template id='son1'>
+        <div>
+            son1
+            <button @click="click">点击</button>
+        </div> 
+    </template>
+    <template id='son2'>
+     
+        <div>
+           <p v-show='state'>son2</p>
+        </div> 
+    </template>
+    <script>
+        let angel=new Vue();
+        new Vue({
+            el:"#app",
+            components:{
+                father:{
+                    template:"#father",
+                    components:{
+                        son1:{
+                            template:"#son1",
+                            methods:{
+                                click(){
+                                    angel.$emit('test')
+                                }
+                            }
+                        },
+                        son2:{
+                            template:"#son2",
+                            data(){
+                                return {
+                                    state:true
+                                }
+                            },
+                            methods:{
+                                change(){
+                                    this.state=!this.state;
+                                }
+                            },
+                            mounted(){
+                                angel.$on('test',this.change)
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

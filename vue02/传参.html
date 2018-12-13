@@ -9,43 +9,37 @@
 </head>
 <body>
     <div id="app">
-        <button @click="display">点击</button>
-        <hr>
-        <haha :test="bool"></haha>
+        {{a}}
+        <hehe :num="a"></hehe>
     </div>
     <template id="tp">
-        <div>              
-            <div :style="obj" v-show='test'>{{test}}</div>
+         <div>              
+            <div  v-bind:num='num' @click="add">{{num}}</div>
         </div>
     </template>
     <script>
-        Vue.component("haha",{
+        Vue.component('hehe',{
             template:"#tp",
+            props:['num'],
             data(){
                 return {
-                    obj:{
-                        width:'100px',
-                        height:'100px',
-                        background:'red'
-                    },
-                    state:true
+                    nums:this.num
                 }
             },
             methods:{
-                show(){
-                    this.state=!this.state;
+                add(){
+                    this.nums++
                 }
-            },
-            props:["test"]
+            }
         })
         new Vue({
             el:"#app",
             data:{
-                bool:true
+                a:1
             },
-            methods:{
-                display(){
-                    this.bool=!this.bool;
+            method:{
+                getAttr(){
+                    
                 }
             }
         })
