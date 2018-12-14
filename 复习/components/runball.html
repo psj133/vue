@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ball></ball>
+    </div>
+    <template id="ball">
+        <div :style="styleObj" @click='run'></div>
+    </template>
+    <script>
+        new Vue({
+            el:"#app",
+            components:{
+                ball:{
+                    template:"#ball",
+                    data(){
+                        return{
+                            styleObj:{
+                                width:"50px",
+                                height:"50px",
+                                borderRadius:"25px",
+                                background:"red",
+                                position:"absolute",
+                               
+                            }
+                        }
+                    },
+                    methods:{
+                        run(e){
+                           setInterval(() => {
+                            e.target.style.left=e.target.offsetLeft+5+'px'
+                           }, 1000);
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

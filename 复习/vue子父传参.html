@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <father></father>
+    </div>
+    <template id="father">
+        <div>
+            <p>father</p>
+            <son @test="change"></son>
+        </div>
+    </template>
+    <template id="son">
+        <div>
+            son
+            <button @click='click'>点击</button>
+        </div>
+    </template>
+    <script>
+        new Vue({
+            el:"#app",
+            components:{
+                father:{
+                    template:"#father",
+                    data(){
+                       return {
+                           state:true
+                       }
+                    },
+                    methods:{
+                        change(){
+                            this.state=!this.state;
+                        }
+                    },
+                    components:{
+                        son:{
+                            template:"#son",
+                            methods:{
+                                click(){
+                                    this.$emit('test');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

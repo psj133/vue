@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>father</p>
+        <hr>
+        <son1 @test='change'></son1>
+        <hr>
+        <son2 :num='state'></son2>
+    </div>
+    <template id="son1">
+        <div>son1
+            <button @click='click'>点击</button>
+        </div>
+    </template>
+    <template id="son2">
+        <div v-show='num'>son2</div>
+    </template>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                state:true
+            },
+            methods:{
+                change(){
+                    this.state=!this.state
+                }
+            },
+            components:{
+                son1:{
+                    template:"#son1",
+                    methods:{
+                        click(){
+                            this.$emit('test');
+                        }
+                    }                  
+                },
+                son2:{
+                    template:"#son2",
+                    props:['num']
+                }
+            }
+        })
+    </script>
+</body>
+</html>

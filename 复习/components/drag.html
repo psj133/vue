@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <drag></drag>
+        <drag></drag>
+        <drag></drag>
+    </div>
+    <template id="drag">
+        <div>
+            <div :style='obj' @mousedown="mouse"></div>
+        </div>
+    </template>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+               
+            },
+            components:{
+                drag:{
+                    template:"#drag",
+                    data(){
+                        return {
+                            disX:0,
+                            disY:0,
+                            obj:{
+                                width:'100px',
+                                height:'100px',
+                                background:'red',
+                                position:"absolute"
+                            }
+                        }
+                    },
+                    methods:{
+                        mouse(e){
+                            let elem=e.target;
+                            this.disX=e.clientX-elem.offsetLeft;
+                            this.disY=e.clientY-elem.offsetTop;
+                            document.onmousemove=(e)=>{
+                                elem.style.left=Math.max(0,Math.min(e.clientX-this.disX,window.innerWidth-elem.offsetWidth))+'px';
+                               elem.style.top=Math.max(0,Math.min(e.clientY-this.disY,window.innerHeight-elem.offsetHeight))+'px'
+                                document.onmouseup=(e)=>{
+                                    document.onmousemove=null;
+                                    elem.onmousedown=null;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
