@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <son></son>
+    </div>
+    <template id="son">
+        <div id='test'>111
+            <input type="text" v-model='a'>{{a}}
+            <button @click='destroy'>销毁</button>
+        </div>
+    </template>
+    <script src="js/vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            components:{
+                son:{
+                    template:"#son",
+                    data(){
+                        return {
+                            a:1
+                        }
+                    },
+                    methods:{
+                        destroy(){
+                            this.$destroy();
+                        }
+                    },
+                    beforeCreate(){
+                        console.log('beforecreate');
+                        console.log(this.a);
+                    },
+                    created(){
+                        console.log('created');
+                        console.log(document.querySelector('#test'))
+                        this.timer=setInterval(()=>{
+                            console.log(this.a++)
+                        },1000)
+                    },
+                    beforeMount(){
+                        console.log('beforeMounted');
+                        console.log(this.a++);
+                        console.log(document.querySelector('#test'))
+                    },
+                    mounted(){
+                        console.log('mounted');
+                        console.log(this.a);
+                        console.log(document.querySelector('#test'))
+                    },
+                    beforeUpdate(){
+                        console.log('beforeUpdate')
+                        console.log(this.a)
+                        console.log(document.getElementById('test'))         	
+                    },
+                    updated(){
+                        console.log('updated')
+                        console.log(this.a)
+                        console.log(document.getElementById('test'))  
+                    },
+                    beforeDestroy(){
+                
+                        console.log('beforeDestroy')
+                        console.log(this.a)
+                        // this.name+=1
+                        clearInterval(this.timer);
+                        console.log(document.getElementById('test'))
+                        // document.getElementById('test').innerHTML='5555'
+                               	
+                    },
+                    destroyed(){
+                        console.log('destroyed');
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

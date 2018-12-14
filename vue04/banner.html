@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <link rel="stylesheet" href="./swiper.css">
+    <style>
+    	.test{
+    		width: 100px;
+    		height: 100px;
+    		border: 1px solid red;
+    	}
+    </style>
+</head>
+<body>
+
+<div id="app">
+	<Banner></Banner>
+
+</div>
+
+<template id='banner'>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for='item in list'>
+        	<img :src="item">
+        </div>
+        
+    </div>
+    {{name}}
+    <input type="text" v-model='name'>
+</div>
+</template>
+    <script src="./swiper.js"></script>
+    <script src='js/vue.js'></script>
+    <script>  
+
+    new Vue({
+    	el:"#app",
+    	components:{
+    		Banner:{
+    			template:'#banner',
+    			data(){
+    				return{
+    					list:[],
+                        name:'你好',
+                        state:false
+    				}
+    			},
+                methods:{
+                    bannerInit() {
+                        setTimeout(()=>{
+                            console.log(111)
+                           this.list=['https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1544608904&di=28dcb9656aeb89fd53409b53da8cb08d&src=http://s6.cdn.deahu.com/show/lfile/8E9CDE37D4E5AFBFEB9A6FB2CC594187.jpg',
+                        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544618990380&di=30ba81b507b744fabbf5f06debed5181&imgtype=0&src=http%3A%2F%2Fwww.asiafinance.cn%2Fu%2Fcms%2Fwww%2F201612%2F13093246x6zz.jpg',
+                        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544618990380&di=3b901e59206c22be6579f4f2ff86a527&imgtype=0&src=http%3A%2F%2Fwww.ittime.com.cn%2Fuploadimage%2Fimages%2F20180801080150.jpg']
+                        // 当上一次数据修改完成（界面修改也完成）之后才会调用回调函数里的方法
+                        Vue.nextTick(()=>{
+                            var mySwiper = new Swiper ('.swiper-container', {
+                            loop: true})
+                        })
+                           
+                        }, 1000);
+                    }
+                },
+    			mounted(){
+    				this.bannerInit() 
+                    
+                    
+                     
+    			},
+
+                updated(){
+                    // if(this.state==false){
+                    //     this.state=true;
+                    //     var mySwiper = new Swiper ('.swiper-container', {
+                    //         loop: true})
+                    // }
+                    
+                }
+    		}
+    	}
+    })      
+// swiper实例化的时候 slider 元素还没有创建踹 所有实例化有问题  导致不能滚动  
+// 在slider 创建完成之后实例化  能否解决问题？ 
+// 在mounted实例化 失败
+// 在update实例化 半成功  多次实例化  update 多次执行
+//.通过状态值控制实例化的执行  可以解决但是不方便
+// nextTick
+  </script>
+</body>
+</html>
